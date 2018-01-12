@@ -1,7 +1,8 @@
 var express = require('express');
 var fs = require('fs');
 var path  = require('path');
-var moment = require('moment');
+var moment = require('moment-timezone');
+moment().tz("America/Los_Angeles").format();
 var router = express.Router();
 
 /* GET home page. */
@@ -18,7 +19,7 @@ router.get('/', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'Express', files, active: 'home' });
+  res.render('index', { title: 'C++ SDK Report', files, active: 'home' });
 });
 
 router.get('/Mac', function(req, res, next) {
@@ -37,14 +38,14 @@ router.get('/Mac', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'Express', files, active: 'mac' });
+  res.render('index', { title: 'C++ SDK Report Mac', files, active: 'mac' });
 });
 
-router.get('/x86_84', function(req, res, next) {
+router.get('/x86_64', function(req, res, next) {
   var files = fs.readdirSync('public/reports')
     .filter(filename => {
       var parsed = filename.split(/[-.]+/);
-      return parsed[4] == 'txt' && parsed[1] == 'x86_84';
+      return parsed[4] == 'txt' && parsed[1] == 'x86_64';
     })
     .sort().reverse()
     .map(filename => {
@@ -56,7 +57,7 @@ router.get('/x86_84', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'Express', files, active: 'x86_84' });
+  res.render('index', { title: 'C++ SDK Report x86_64', files, active: 'x86_64' });
 });
 
 router.get('/windows', function(req, res, next) {
@@ -75,7 +76,7 @@ router.get('/windows', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'Express', files, active: 'windows' });
+  res.render('index', { title: 'C++ SDK Report Windows', files, active: 'windows' });
 });
 
 router.get('/pisces', function(req, res, next) {
@@ -94,7 +95,7 @@ router.get('/pisces', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'Express', files, active: 'pisces' });
+  res.render('index', { title: 'C++ SDK Report Pisces', files, active: 'pisces' });
 });
 
 router.get('/arm', function(req, res, next) {
@@ -113,7 +114,7 @@ router.get('/arm', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'Express', files, active: 'arm' });
+  res.render('index', { title: 'C++ SDK Report ARM', files, active: 'arm' });
 });
 
 module.exports = router;
