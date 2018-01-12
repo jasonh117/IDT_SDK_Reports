@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <a class="navbar-brand" href="#">C++ SDK Report</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item <%= active == 'home' && 'active' %>">
+            <a class="nav-link" href="/">Home</a>
+          </li>
+          <li class="nav-item <%= active == 'mac' && 'active' %>">
+            <a class="nav-link" href="mac">Mac</a>
+          </li>
+          <li class="nav-item <%= active == 'x86_84' && 'active' %>">
+            <a class="nav-link" href="x86_84">x86_84</a>
+          </li>
+          <li class="nav-item <%= active == 'windows' && 'active' %>">
+            <a class="nav-link" href="windows">Windows</a>
+          </li>
+          <li class="nav-item <%= active == 'pisces' && 'active' %>">
+            <a class="nav-link" href="pisces">Pisces</a>
+          </li>
+          <li class="nav-item <%= active == 'arm' && 'active' %>">
+            <a class="nav-link" href="arm">ARM</a>
+          </li>
+        </ul>
+      </div>
+    </nav>

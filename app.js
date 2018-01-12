@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var serveIndex = require('serve-index')
 var nconf = require('nconf');
 const cors = require('cors');
 
@@ -25,11 +24,10 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-// app.use(express.static(path.join(__dirname, 'public/reports')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', index);
+app.use('/', index);
 app.use('/upload', upload);
-app.use('/', express.static('public/reports'), serveIndex('public/reports', {'icons': true, 'view': 'details'}))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

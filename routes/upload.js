@@ -20,7 +20,7 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     var extension = path.extname(file.originalname);
-    cb(null, path.basename(file.originalname, extension) + '_' + moment().format('Y-MM-DD_HH-mm-ss') + extension);
+    cb(null, `${Date.now()}-${path.basename(file.originalname, extension)}-${req.body.result}${extension}`);
   }
 })
 
@@ -32,7 +32,7 @@ var upload = multer({
 })
 
 router.post('/', upload.any(), function (req, res, next) {
-  if (req.body.password !== password) {
+  if (req.body.password !== 'dsMnqiZpFVfhWp5frDAGisRtBX7klY7A') {
     req.files.map(file => {
       if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
     });
