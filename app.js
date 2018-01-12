@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var nconf = require('nconf');
 const cors = require('cors');
+var moment = require('moment-timezone');
+moment.tz.setDefault('America/Los_Angeles');
 
 var index = require('./routes/index');
 var upload = require('./routes/upload');
