@@ -32,7 +32,7 @@ var upload = multer({
 })
 
 router.post('/', upload.any(), function (req, res, next) {
-  if (req.body.password !== 'dsMnqiZpFVfhWp5frDAGisRtBX7klY7A') {
+  if (req.body.password !== password) {
     req.files.map(file => {
       if (fs.existsSync(file.path)) fs.unlinkSync(file.path);
     });
