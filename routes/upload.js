@@ -6,6 +6,7 @@ var moment = require('moment');
 var formidable = require('express-formidable');
 var router = express.Router();
 var nconf = require('nconf');
+nconf.argv().env();
 var password = nconf.get('PASSWORD');
 
 var dir = 'public/reports';
