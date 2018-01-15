@@ -1,5 +1,4 @@
 body {
-  padding: 50px;
   padding-top: 5rem;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -9,8 +8,6 @@ a {
 }
 
 .main-container {
-  margin: 50px;
-  padding: 3rem 1.5rem;
   text-align: center;
 }
 
