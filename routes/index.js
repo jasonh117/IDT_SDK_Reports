@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'C++ SDK Report', files, active: 'home' });
+  res.render('index', { title: 'ID TECH C++ SDK Report', files, active: 'home' });
 });
 
 router.get('/Mac', function(req, res, next) {
@@ -37,7 +37,7 @@ router.get('/Mac', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'C++ SDK Report Mac', files, active: 'mac' });
+  res.render('index', { title: 'ID TECH C++ SDK Report Mac', files, active: 'mac' });
 });
 
 router.get('/x86_64', function(req, res, next) {
@@ -56,7 +56,7 @@ router.get('/x86_64', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'C++ SDK Report x86_64', files, active: 'x86_64' });
+  res.render('index', { title: 'ID TECH C++ SDK Report x86_64', files, active: 'x86_64' });
 });
 
 router.get('/windows', function(req, res, next) {
@@ -75,7 +75,7 @@ router.get('/windows', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'C++ SDK Report Windows', files, active: 'windows' });
+  res.render('index', { title: 'ID TECH C++ SDK Report Windows', files, active: 'windows' });
 });
 
 router.get('/pisces', function(req, res, next) {
@@ -94,7 +94,7 @@ router.get('/pisces', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'C++ SDK Report Pisces', files, active: 'pisces' });
+  res.render('index', { title: 'ID TECH C++ SDK Report Pisces', files, active: 'pisces' });
 });
 
 router.get('/arm', function(req, res, next) {
@@ -113,7 +113,7 @@ router.get('/arm', function(req, res, next) {
         filename: filename
       }
     });
-  res.render('index', { title: 'C++ SDK Report ARM', files, active: 'arm' });
+  res.render('index', { title: 'ID TECH C++ SDK Report ARM', files, active: 'arm' });
 });
 
 module.exports = router;
