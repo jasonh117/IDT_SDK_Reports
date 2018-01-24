@@ -1,119 +1,77 @@
-var express = require('express');
-var fs = require('fs');
-var path  = require('path');
-var moment = require('moment-timezone');
-var router = express.Router();
+const express = require('express');
+const fs = require('fs');
+const path  = require('path');
+const moment = require('moment-timezone');
+const router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  var files = fs.readdirSync('public/reports')
-    .filter(filename => path.extname(filename) == '.txt')
-    .sort().reverse()
-    .map(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return {
-        name: `${parsed[1]} ${parsed[2]}`,
-        datetime: moment(parsed[0], 'x').format('lll'),
-        status: parsed[3],
-        filename: filename
-      }
-    });
-  res.render('index', { title: 'ID TECH C++ SDK Report', files, active: 'home' });
-});
-
-router.get('/Mac', function(req, res, next) {
-  var files = fs.readdirSync('public/reports')
+const getpage = (req, res, next) => {
+  let libTypes = new Set();
+  libTypes.add('all');
+  const type = res.locals.type;
+  let activeType = null;
+  if (req.query.type) {
+    const libtype = req.query.type.trim().toLowerCase();
+    if (libtype !== 'all')
+      activeType = libtype;
+  }
+  let files = fs.readdirSync('public/reports')
     .filter(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return parsed[4] == 'txt' && parsed[1] == 'Mac';
+      let parsed = filename.split(/[-.]+/);
+      if (type !== 'Home')
+        return parsed[4] == 'txt' && parsed[1] == type;
+      return parsed[4] == 'txt';
     })
     .sort().reverse()
     .map(filename => {
-      var parsed = filename.split(/[-.]+/);
+      let parsed = filename.split(/[-.]+/);
+      libTypes.add(parsed[2]);
       return {
-        name: `${parsed[1]} ${parsed[2]}`,
+        name: `${parsed[1]} ${parsed[2]} report`,
         datetime: moment(parsed[0], 'x').format('lll'),
         status: parsed[3],
-        filename: filename
+        filename: filename,
+        type: parsed[2].toLowerCase()
       }
-    });
-  res.render('index', { title: 'ID TECH C++ SDK Report Mac', files, active: 'mac' });
-});
+    })
+    .filter(file => activeType ? file.type === activeType : true);
+  libTypes = Array.from(libTypes).sort();
+  res.render('index', {
+    title: 'ID TECH C++ SDK Report',
+    files,
+    active: type,
+    libTypes,
+    activeType
+  });
+}
+
+router.get('/', function(req, res, next) {
+  res.locals.type = 'Home'
+  next();
+}, getpage);
+
+router.get('/mac', function(req, res, next) {
+  res.locals.type = 'Mac'
+  next();
+}, getpage);
 
 router.get('/x86_64', function(req, res, next) {
-  var files = fs.readdirSync('public/reports')
-    .filter(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return parsed[4] == 'txt' && parsed[1] == 'x86_64';
-    })
-    .sort().reverse()
-    .map(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return {
-        name: `${parsed[1]} ${parsed[2]}`,
-        datetime: moment(parsed[0], 'x').format('lll'),
-        status: parsed[3],
-        filename: filename
-      }
-    });
-  res.render('index', { title: 'ID TECH C++ SDK Report x86_64', files, active: 'x86_64' });
-});
+  res.locals.type = 'x86_64'
+  next();
+}, getpage);
 
 router.get('/windows', function(req, res, next) {
-  var files = fs.readdirSync('public/reports')
-    .filter(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return parsed[4] == 'txt' && parsed[1] == 'Windows';
-    })
-    .sort().reverse()
-    .map(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return {
-        name: `${parsed[1]} ${parsed[2]}`,
-        datetime: moment(parsed[0], 'x').format('lll'),
-        status: parsed[3],
-        filename: filename
-      }
-    });
-  res.render('index', { title: 'ID TECH C++ SDK Report Windows', files, active: 'windows' });
-});
+  res.locals.type = 'Windows'
+  next();
+}, getpage);
 
 router.get('/pisces', function(req, res, next) {
-  var files = fs.readdirSync('public/reports')
-    .filter(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return parsed[4] == 'txt' && parsed[1] == 'Pisces';
-    })
-    .sort().reverse()
-    .map(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return {
-        name: `${parsed[1]} ${parsed[2]}`,
-        datetime: moment(parsed[0], 'x').format('lll'),
-        status: parsed[3],
-        filename: filename
-      }
-    });
-  res.render('index', { title: 'ID TECH C++ SDK Report Pisces', files, active: 'pisces' });
-});
+  res.locals.type = 'Pisces'
+  next();
+}, getpage);
 
 router.get('/arm', function(req, res, next) {
-  var files = fs.readdirSync('public/reports')
-    .filter(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return parsed[4] == 'txt' && parsed[1] == 'ARM';
-    })
-    .sort().reverse()
-    .map(filename => {
-      var parsed = filename.split(/[-.]+/);
-      return {
-        name: `${parsed[1]} ${parsed[2]}`,
-        datetime: moment(parsed[0], 'x').format('lll'),
-        status: parsed[3],
-        filename: filename
-      }
-    });
-  res.render('index', { title: 'ID TECH C++ SDK Report ARM', files, active: 'arm' });
-});
+  res.locals.type = 'ARM'
+  next();
+}, getpage);
 
 module.exports = router;

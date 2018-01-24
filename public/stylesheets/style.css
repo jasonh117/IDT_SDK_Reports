@@ -14,3 +14,7 @@ a {
 .table-hover {
   cursor: pointer;
 }
+
+#lib-selection-btns {
+  margin-bottom: 2rem;
+}

@@ -1,6 +1,11 @@
 <%- include('header.ejs'); %>
 
 <div class="container main-container">
+  <div id="lib-selection-btns" class="btn-group">
+    <% for (let type of libTypes) { %>
+      <a class="btn btn-secondary <%= activeType === type ? 'active' : '' %>" href="/?type=<%= type %>" role="button"><%= type %></a>
+    <% } %>
+  </div>
   <table class="table table-hover">
     <thead>
       <tr>
